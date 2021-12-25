@@ -1,1 +1,23 @@
-<p>chat works!</p>
+<div class="card mx-4 my-4">
+  <div class="card-header">
+    <ul class="nav nap-pills card-header-pills">
+      <li>
+        <button class="btn btn-success" type="button" (click)="connect()" *ngIf="!statusConnect" >Connect</button>
+      </li>
+      <li>
+        <button class="btn btn-warning" type="button" (click)="disconnect() " *ngIf="statusConnect">Disconnect</button>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body" style="overflow: scroll; height: 50vh" *ngIf="statusConnect">
+
+  </div>
+  <div class="card-footer" *ngIf="statusConnect">
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Введите заметку" name="text" style=""/>
+      </div>
+      <button class="btn btn-primary">Send</button>
+    </form>
+  </div>
+</div>

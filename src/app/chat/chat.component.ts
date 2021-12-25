@@ -9,6 +9,7 @@ import * as SockJs from 'sockjs-client';
 })
 export class ChatComponent implements OnInit {
 
+  statusConnect: boolean = false;
   private client: Client;
   constructor() { }
 
@@ -19,10 +20,22 @@ export class ChatComponent implements OnInit {
     }
 
     this.client.onConnect = (frame) => {
-      console.log('connect:' + this.client.connected + ' : ' + frame)
+      console.log('connect:' + this.client.connected + ' : ' + frame);
+      this.statusConnect = true;
+      console.log(' что там со статусом подключениея :' + this.statusConnect);
     }
 
+    this.client.onDisconnect = (frame) => {
+      console.log('connect:' + !this.client.connected + ' : ' + frame);
+      this.statusConnect = false;
+      console.log(' что там со статусом подключениея :' + this.statusConnect)
+    }
+
+  }
+  connect():void {
     this.client.activate();
   }
-
+  disconnect():void {
+    this.client.deactivate();
+  }
 }
