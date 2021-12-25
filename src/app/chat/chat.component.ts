@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Client} from "@stomp/stompjs";
+import * as SockJs from 'sockjs-client';
 
 @Component({
   selector: 'app-chat',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+
+  private client: Client;
 
   constructor() { }
 
