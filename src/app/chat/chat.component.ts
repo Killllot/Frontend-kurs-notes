@@ -32,6 +32,9 @@ export class ChatComponent implements OnInit {
       console.log(' что там со статусом подключениея :' + this.statusConnect);
       this.client.subscribe('/chat/message', data => {
         let message: Message = JSON.parse(data.body) as Message;
+        this.messages = this.messages.filter( data => {
+          return data.id !== message.id;
+        })
         this.messages.push(message);
         console.log(message);
       });
@@ -56,10 +59,13 @@ export class ChatComponent implements OnInit {
   sendMessage():void {
     this.client.publish({destination: '/chat/message',body: JSON.stringify(this.message)});
     this.message.text = '';
+    this.message.id = '';
   }
 
   edit(msg: Message) {
     let copyMessage = {...msg};
+    this.message.id = msg.id;
+    this.message.text = msg.text;
   }
   delete(msg: Message) {
     console.log(this.messages);
